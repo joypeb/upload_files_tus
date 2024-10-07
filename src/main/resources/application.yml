@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: photo3
+tus.upload:
+  path: uploads
+  expiration: 86400000

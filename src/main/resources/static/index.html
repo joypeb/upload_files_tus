@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이승준, 박은솔 Wedding Photo</title>
+    <link href="https://releases.transloadit.com/uppy/v3.3.1/uppy.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Serif+KR:wght@400;700&display=swap');
+        :root {
+            --moss-green: #8A9A5B;
+            --light-moss: #B8C4A1;
+            --dark-moss: #4A5D23;
+        }
+        body {
+            font-family: 'Noto Serif KR', serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #afb8af;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .title-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .names {
+            font-size: 2.5em;
+            color: #344C3D;
+            margin-bottom: 10px;
+        }
+        .wedding-photo {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3em;
+            color: #738A6E;
+            margin-top: 10px;
+        }
+        .heart {
+            color: #344C3D;
+            font-size: 1em;
+            display: inline-block;
+            animation: beat 1s infinite alternate;
+        }
+        @keyframes beat {
+            to { transform: scale(1.1); }
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            margin-bottom: 10px;
+            color: #344C3D;
+            font-size: 1.1em;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #738A6E;
+            border-radius: 25px;
+            font-size: 16px;
+            text-align: center;
+            background-color: #ffffff;
+            color: #344C3D;
+        }
+        .file-input-wrapper {
+            width: 100%;
+            max-width: 300px;
+            height: 150px;
+            margin-bottom: 20px;
+            background-color: #738A6E;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+        .file-input-wrapper:hover {
+            background-color: #8EA58C;
+        }
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        .file-input-wrapper .btn {
+            color: #e1eadf;
+            font-size: 18px;
+            text-align: center;
+        }
+        #preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        #preview img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        button[type="submit"] {
+            background-color: #344C3D;
+            color: #e1eadf;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #738A6E;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: #BFCFBB;
+            margin: 15% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .modal-content h2 {
+            margin-top: 0;
+            color: #344C3D;
+        }
+        #progress {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #344C3D;
+        }
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #738A6E;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+        .checkmark {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #BFCFBB;
+            stroke-miterlimit: 10;
+            margin: 10% auto;
+            box-shadow: inset 0 0 0 #738A6E;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        }
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
+        @keyframes scale {
+            0%, 100% { transform: none; }
+            50% { transform: scale3d(1.1, 1.1, 1); }
+        }
+        @keyframes fill {
+            100% { box-shadow: inset 0 0 0 30px #738A6E; }
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .names {
+                font-size: 2em;
+            }
+
+            .wedding-photo {
+                font-size: 2.5em;
+            }
+
+            .file-input-wrapper {
+                height: 120px;
+            }
+
+            .file-input-wrapper .btn {
+                font-size: 16px;
+            }
+
+            button[type="submit"] {
+                font-size: 16px;
+                padding: 12px 24px;
+                margin-top: 10px;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title-container">
+            <h1 class="names">이승준, 박은솔</h1>
+            <h2 class="wedding-photo">Wedding Photo</h2>
+        </div>
+        <form id="uploadForm">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" required placeholder="성함을 입력해주세요">
+
+            <div class="file-input-wrapper">
+                <div class="btn">추억을 선택해주세요<br>(사진 및 동영상)</div>
+                <input type="file" id="files" name="files" multiple accept="image/*,video/*" required>
+            </div>
+
+            <div id="preview"></div>
+
+            <button type="submit" id="upload-btn">추억 공유하기</button>
+        </form>
+    </div>
+
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <h2 id="uploadTitle">업로드가 진행중입니다..</h2>
+            <div id="progress"></div>
+<!--            <button id="pause-btn" style="display:none;">일시 중지</button>-->
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" style="display: none;">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tus-js-client@latest/dist/tus.min.js"></script>
+    <script>
+        const form = document.getElementById('uploadForm');
+        const fileInput = document.getElementById('files');
+        const preview = document.getElementById('preview');
+        const progressDiv = document.getElementById('progress');
+        const modal = document.getElementById('uploadModal');
+        const checkmark = document.querySelector('.checkmark');
+        const uploadTitle = document.getElementById('uploadTitle');
+        const uploadBtn = document.getElementById('upload-btn');
+
+        // Existing preview functionality
+        function getVideoThumbnail(file) {
+            return new Promise((resolve) => {
+                const video = document.createElement('video');
+                video.preload = 'metadata';
+                video.onloadedmetadata = function() {
+                    video.currentTime = 0;
+                };
+                video.onseeked = function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                    resolve(canvas.toDataURL());
+                };
+                video.src = URL.createObjectURL(file);
+            });
+        }
+
+        fileInput.addEventListener('change', async function() {
+            preview.innerHTML = '';
+            for (let file of this.files) {
+                let src;
+                if (file.type.startsWith('image/')) {
+                    src = URL.createObjectURL(file);
+                } else if (file.type.startsWith('video/')) {
+                    src = await getVideoThumbnail(file);
+                }
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = "preview";
+                preview.appendChild(img);
+            }
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const files = fileInput.files;
+
+            modal.style.display = "block";
+            progressDiv.innerHTML = `${files.length}개의 파일 업로드를 준비 중입니다`;
+            checkmark.style.display = 'none';
+
+            let currentUpload;
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const chunkSize = 1024 * 1024 * 5; // 5MB
+
+                currentUpload = new tus.Upload(file, {
+                    endpoint: "/upload",
+                    chunkSize,
+                    retryDelays: [0, 1000, 3000, 5000],
+                    metadata: {
+                        filename: file.name,
+                        filetype: file.type,
+                        name: name
+                    },
+                    onError: (error) => {
+                        console.log("Failed because: " + error);
+                        progressDiv.innerHTML += `<br>파일 ${i + 1} 업로드 중 오류 발생: ${error.message}`;
+                    },
+                    onProgress: (bytesUploaded, bytesTotal) => {
+                        const percentage = ((bytesUploaded / bytesTotal) * 100).toFixed(2);
+                        progressDiv.innerHTML = `파일 업로드 중... (${i + 1}/${files.length}) - ${percentage}%`;
+                    },
+                    onSuccess: () => {
+                        if (i === files.length - 1) {
+                            checkmark.style.display = 'block';
+                            uploadTitle.innerHTML = '업로드가 완료되었습니다.';
+                            progressDiv.innerHTML = '모든 파일의 업로드가 완료되었습니다!<br>감사합니다!';
+
+                            setTimeout(() => {
+                                modal.style.display = "none";
+                                checkmark.style.display = 'none';
+                            }, 3000);
+                        }
+                    }
+                });
+
+                await currentUpload.findPreviousUploads().then((previousUploads) => {
+                    if (previousUploads.length) {
+                        currentUpload.resumeFromPreviousUpload(previousUploads[0]);
+                    }
+                    currentUpload.start();
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>
