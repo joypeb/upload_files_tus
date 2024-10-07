@@ -4,3 +4,5 @@ spring:
 tus.upload:
   path: uploads
   expiration: 86400000
+server:
+  port: 8088
